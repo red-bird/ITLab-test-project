@@ -1,4 +1,5 @@
 # *ITLab test project*
+![Spring cloud](https://miro.medium.com/max/5912/1*pNG0JHmOr3Zp83_hkGyR_A.png)
 ## Ссылки
 [Техническое задание](https://github.com/RTUITLab/Recruit)
 
@@ -50,6 +51,9 @@
   
   Также механизм отправления запросов от сервиса к сервису
  осуществлен с помощью [OpenFeign](https://spring.io/projects/spring-cloud-openfeign) (Декларативный Rest клиент).
+ 
+ Присутствует балансировщик нагрузки [Spring cloud load balancer](https://spring.io/guides/gs/spring-cloud-loadbalancer/),
+ но т. к. сервисы только в одном экземпляре, толку от этого мало.
  
  Была предпринята попытка отправлять логику на [elk stack](https://www.elastic.co/what-is/elk-stack), но не вышло/времени не хватило
 
