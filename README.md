@@ -73,7 +73,7 @@
  ## А пользоваться как?
  Я мог бы тут, конечно, описать что да как, но за меня это сделает [open api 3.0](https://swagger.io/blog/news/whats-new-in-openapi-3-0/)
  , он же swagger.
- ![swagger](https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn.auth0.com%2Fblog%2Faspnet-core-web-apis%2Fswagger.png&f=1&nofb=1)
+ ![swagger](https://upload.wikimedia.org/wikipedia/commons/a/ab/Swagger-logo.png)
  
  К сожалению, по какой-то неведомой мне причине получить ui страницу с документацией через api gateway не предоставляется возможным,
  поэтому я приложу пути к документации:
