@@ -73,6 +73,7 @@
  ## А пользоваться как?
  Я мог бы тут, конечно, описать что да как, но за меня это сделает [open api 3.0](https://swagger.io/blog/news/whats-new-in-openapi-3-0/)
  , он же swagger.
+ 
  ![swagger](https://upload.wikimedia.org/wikipedia/commons/a/ab/Swagger-logo.png)
  
  К сожалению, по какой-то неведомой мне причине получить ui страницу с документацией через api gateway не предоставляется возможным,
