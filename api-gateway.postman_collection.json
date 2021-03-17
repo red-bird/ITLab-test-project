@@ -1,0 +1,454 @@
+{
+	"variables": [],
+	"info": {
+		"name": "api-gateway",
+		"_postman_id": "3a6aa62c-552e-1bfd-23b8-c7d2b052c299",
+		"description": "# Routing\n### localhost:8080/api/{route}/**\n- shops/\n- factory/\n- purchase/",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "factory-service",
+			"description": "",
+			"item": [
+				{
+					"name": "save factory \"ural\"",
+					"request": {
+						"url": "http://localhost:8080/api/factory/factory",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"factoryName\": \"URAL\",\r\n  \"goodInfoDTOList\": [\r\n    {\r\n      \"name\": \"fridge\",\r\n      \"description\": \"cold\",\r\n      \"shopName\": \"Hoff\",\r\n      \"category\": \"furniture\",\r\n      \"timeMillis\": 300\r\n    },\r\n    {\r\n      \"name\": \"shelf\",\r\n      \"description\": \"wood\",\r\n      \"shopName\": \"Hoff\",\r\n      \"category\": \"furniture\",\r\n      \"timeMillis\": 3000\r\n    }\r\n  ]\r\n}"
+						},
+						"description": "# Create factory \"Ural\" with 2 goods"
+					},
+					"response": []
+				},
+				{
+					"name": "get all goods from factory",
+					"request": {
+						"url": "http://localhost:8080/api/factory/factory/goods",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "save factory \"Bryansk-sever\"",
+					"request": {
+						"url": "http://localhost:8080/api/factory/factory",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"factoryName\": \"Bryansk-sever\",\r\n  \"goodInfoDTOList\": [\r\n    {\r\n      \"name\": \"coat\",\r\n      \"description\": \"john wick\",\r\n      \"shopName\": \"rynok\",\r\n      \"category\": \"clothes\",\r\n      \"timeMillis\": 10000\r\n    },\r\n    {\r\n      \"name\": \"apples\",\r\n      \"description\": \"delicious\",\r\n      \"shopName\": \"rynok\",\r\n      \"category\": \"food\",\r\n      \"timeMillis\": 100\r\n    },\r\n    {\r\n      \"name\": \"chair\",\r\n      \"description\": \"flip\",\r\n      \"shopName\": \"Hoff\",\r\n      \"category\": \"furniture\",\r\n      \"timeMillis\": 7000\r\n    }\r\n  ]\r\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "shop-service",
+			"description": "",
+			"item": [
+				{
+					"name": "save shop \"Hoff\"",
+					"request": {
+						"url": "http://localhost:8080/api/shops/shops",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Hoff\",\r\n  \"address\": \"Moscow\",\r\n  \"number\": \"+7 999 999 99 99\",\r\n  \"category\": \"furniture\"\r\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "get all shops",
+					"request": {
+						"url": "http://localhost:8080/api/shops/shops",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "add good manually to \"Hoff\"",
+					"request": {
+						"url": "http://localhost:8080/api/shops/goods",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"table\",\r\n  \"description\": \"4 legs\",\r\n  \"cost\": 1000,\r\n  \"amount\": 50,\r\n  \"shopName\": \"Hoff\",\r\n  \"category\": \"furniture\"\r\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "get all goods",
+					"request": {
+						"url": "http://localhost:8080/api/shops/goods",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "save shop \"rynok\"",
+					"request": {
+						"url": "http://localhost:8080/api/shops/shops",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"rynok\",\r\n  \"address\": \"Vologda\",\r\n  \"number\": \"+7 000 000 00 00\",\r\n  \"category\": \"food\"\r\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Get all goods of Hoff",
+					"request": {
+						"url": "http://localhost:8080/api/shops/shops/name/Hoff",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "get all fridges",
+					"request": {
+						"url": "http://localhost:8080/api/shops/goods/name/fridge",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "get all goods of food category",
+					"request": {
+						"url": "http://localhost:8080/api/shops/goods/category/food",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "save shop fail test",
+					"request": {
+						"url": "http://localhost:8080/api/shops/shops",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"chepuha\",\r\n  \"address\": \"Vologda\",\r\n  \"number\": \"+7 000 000 00 00\",\r\n  \"category\": \"chepuha\"\r\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "change value of good 1id",
+					"request": {
+						"url": "http://localhost:8080/api/shops/goods/1",
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"cost\": \"200.5\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "change value of good 2id",
+					"request": {
+						"url": "http://localhost:8080/api/shops/goods/2",
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"cost\": \"1007\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "change \"Hoff\" number",
+					"request": {
+						"url": "http://localhost:8080/api/shops/shops/1",
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"number\": \"+7 444 444 44 44\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "get all records of bought goods",
+					"request": {
+						"url": "http://localhost:8080/api/shops/buy",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "get all records of bought goods of 0id customer",
+					"request": {
+						"url": "http://localhost:8080/api/shops/buy/customer/0",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "get all records of bought goods of Hoff shop",
+					"request": {
+						"url": "http://localhost:8080/api/shops/buy/shop/Hoff",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "get all records of bought fridges",
+					"request": {
+						"url": "http://localhost:8080/api/shops/buy/name/fridge",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "purchase-service",
+			"description": "",
+			"item": [
+				{
+					"name": "buy fridge & shelf from \"Hoff\"",
+					"request": {
+						"url": "http://localhost:8080/api/purchase/buy",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"customerId\": 0,\r\n  \"shopName\": \"Hoff\",\r\n  \"paymentMethod\": \"card\",\r\n  \"goodDTOS\": [\r\n    {\r\n      \"name\": \"fridge\",\r\n      \"description\": \"cold\",\r\n      \"cost\": 200.5,\r\n      \"amount\": 5,\r\n      \"shopName\": \"hoff\",\r\n      \"category\": \"furniture\"\r\n    },\r\n    {\r\n      \"name\": \"shelf\",\r\n      \"description\": \"wood\",\r\n      \"cost\": 1007,\r\n      \"amount\": 7,\r\n      \"shopName\": \"hoff\",\r\n      \"category\": \"furniture\"\r\n    }\r\n  ]\r\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "test of own category",
+					"request": {
+						"url": "http://localhost:8080/api/purchase/buy",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"customerId\": 0,\r\n  \"shopName\": \"rynok\",\r\n  \"paymentMethod\": \"cash\",\r\n  \"goodDTOS\": [\r\n    {\r\n      \"name\": \"coat\",\r\n      \"description\": \"john wick\",\r\n      \"cost\": 0,\r\n      \"amount\": 1,\r\n      \"shopName\": \"rynok\",\r\n      \"category\": \"MY OWN CATEGORY\"\r\n    },\r\n    {\r\n      \"name\": \"apples\",\r\n      \"description\": \"delicious\",\r\n      \"cost\": 0,\r\n      \"amount\": 7,\r\n      \"shopName\": \"rynok\",\r\n      \"category\": \"THATS ALSo\"\r\n    }\r\n  ]\r\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "buy fail test",
+					"request": {
+						"url": "http://localhost:8080/api/purchase/buy",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"customerId\": 0,\r\n  \"shopName\": \"rynok\",\r\n  \"paymentMethod\": \"cash\",\r\n  \"goodDTOS\": [\r\n    {\r\n      \"name\": \"Chepuha\",\r\n      \"description\": \"john wick\",\r\n      \"cost\": 0,\r\n      \"amount\": 1,\r\n      \"shopName\": \"rynok\",\r\n      \"category\": \"MY OWN CATEGORY\"\r\n    }\r\n  ]\r\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "get all checks",
+					"request": {
+						"url": "http://localhost:8080/api/purchase/checks",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "get all purchases",
+					"request": {
+						"url": "http://localhost:8080/api/purchase/purchase",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "get all checks of 0id customer",
+					"request": {
+						"url": "http://localhost:8080/api/purchase/checks/customer/0",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "get all checks of Hoff shop",
+					"request": {
+						"url": "http://localhost:8080/api/purchase/checks/shopName/Hoff",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "get all checks of card purchase",
+					"request": {
+						"url": "http://localhost:8080/api/purchase/checks/payment/card",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "change category of 1id purchase",
+					"request": {
+						"url": "http://localhost:8080/api/purchase/purchase/1",
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"category\": \"changed\"\t\r\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
