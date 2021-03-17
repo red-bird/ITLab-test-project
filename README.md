@@ -1,10 +1,10 @@
 # *ITLab test project*
 ## Ссылки
-[Техническое задание](https://github.com/RTUITLab/Recruit/blob/master/requirements/back/README.md)
+[Техническое задание](https://github.com/RTUITLab/Recruit)
 
-[ТЗ для backend'a](https://github.com/RTUITLab/Recruit)
+[ТЗ для backend'a](https://github.com/RTUITLab/Recruit/blob/master/requirements/back/README.md)
 
-####Сервисы:
+#### Сервисы:
 
 * [Discovery](https://github.com/red-bird/EurekaServer)
 * [Config](https://github.com/red-bird/ConfigServer)
