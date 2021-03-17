@@ -1,0 +1,231 @@
+version: "3.9"
+
+volumes:
+  purchase_data:
+  shops_data:
+  factory_data:
+
+networks:
+  chain:
+    driver: bridge
+
+services:
+
+  purchase-db:
+    image: postgres:13.2-alpine
+    container_name: purchase-db
+    networks:
+      - chain
+    volumes:
+      - purchase_data:/var/lib/postgresql/data
+    restart: always
+#    ports:
+#      - 5432:5432
+    environment:
+      - POSTGRES_PASSWORD=1945
+      - POSTGRES_DB=purchase
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  shops-db:
+    image: postgres:13.2-alpine
+    container_name: shops-db
+    networks:
+      - chain
+    volumes:
+      - shops_data:/var/lib/postgresql/data
+    restart: always
+    environment:
+      - POSTGRES_PASSWORD=1945
+      - POSTGRES_DB=shops
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  factory-db:
+    image: postgres:13.2-alpine
+    container_name: factory-db
+    networks:
+      - chain
+    volumes:
+      - factory_data:/var/lib/postgresql/data
+    restart: always
+    environment:
+      - POSTGRES_PASSWORD=1945
+      - POSTGRES_DB=factory
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  purchase-service:
+    image: redbird127/purchase-service
+    container_name: purchase-service
+    networks:
+      - chain
+    restart: always
+    depends_on:
+      config-server:
+        condition: service_healthy
+      eureka-server:
+        condition: service_healthy
+      purchase-db:
+        condition: service_healthy
+    ports:
+      - 8081:8081
+    environment:
+      - PORT=8081
+      - EUREKA_SERVER_ADDR=eureka-server
+      - EUREKA_SERVER_PORT=8761
+      #      - LOGSTASH_DESTINATION_IP_AND_PORT=127.0.0.1:5000
+      - DATASOURCE_ADDR=purchase-db
+      - DATASOURCE_PORT=5432
+      - DATASOURCE_DB=purchase
+      - DATASOURCE_USERNAME=postgres
+      - DATASOURCE_PASSWORD=1945
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+    healthcheck:
+      # change if port changed
+      test: [ "CMD-SHELL", "curl http://localhost:8081/actuator/health" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  shops-service:
+    image: redbird127/shops-service
+    container_name: shops-service
+    networks:
+      - chain
+    restart: always
+    depends_on:
+      config-server:
+        condition: service_healthy
+      eureka-server:
+        condition: service_healthy
+      shops-db:
+        condition: service_healthy
+    ports:
+      - 8082:8082
+    environment:
+      - PORT=8082
+      - EUREKA_SERVER_ADDR=eureka-server
+      - EUREKA_SERVER_PORT=8761
+      #        - LOGSTASH_DESTINATION_IP_AND_PORT=127.0.0.1:5000
+      - DATASOURCE_ADDR=shops-db
+      - DATASOURCE_PORT=5432
+      - DATASOURCE_DB=shops
+      - DATASOURCE_USERNAME=postgres
+      - DATASOURCE_PASSWORD=1945
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+    healthcheck:
+      # change if port changed
+      test: [ "CMD-SHELL", "curl http://localhost:8082/actuator/health" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  factory-service:
+    image: redbird127/factory-service
+    container_name: factory-service
+    networks:
+      - chain
+    restart: always
+    depends_on:
+      config-server:
+        condition: service_healthy
+      eureka-server:
+        condition: service_healthy
+      factory-db:
+        condition: service_healthy
+    ports:
+      - 8083:8083
+    environment:
+      - PORT=8083
+      - EUREKA_SERVER_ADDR=eureka-server
+      - EUREKA_SERVER_PORT=8761
+      #        - LOGSTASH_DESTINATION_IP_AND_PORT=127.0.0.1:5000
+      - DATASOURCE_ADDR=factory-db
+      - DATASOURCE_PORT=5432
+      - DATASOURCE_DB=factory
+      - DATASOURCE_USERNAME=postgres
+      - DATASOURCE_PASSWORD=1945
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+    healthcheck:
+      # change if port changed
+      test: [ "CMD-SHELL", "curl http://localhost:8083/actuator/health" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  eureka-server:
+    image: redbird127/eureka-server
+    container_name: eureka-server
+    networks:
+      - chain
+    restart: always
+    depends_on:
+      config-server:
+        condition: service_healthy
+    ports:
+      - 8761:8761
+    environment:
+      - EUREKA_SERVER_PORT=8761
+      - CONFIG_SERVER_ADDR=config-server
+      - CONFIG_SERVER_PORT=8888
+#      - LOGSTASH_DESTINATION_IP_AND_PORT=127.0.0.1:5000
+    healthcheck:
+      # change if port changed
+      test: [ "CMD-SHELL", "curl http://localhost:8761/actuator/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  config-server:
+    image: redbird127/config-server
+    container_name: config-server
+    networks:
+      - chain
+    restart: always
+    ports:
+      - 8888:8888
+    environment:
+      - CONFIG_SERVER_PORT=8888
+      - EUREKA_SERVER_ADDR=eureka-server
+      - EUREKA_SERVER_PORT=8761
+    #      - LOGSTASH_DESTINATION_IP_AND_PORT=127.0.0.1:5000
+    healthcheck:
+      # change if port changed
+      test: [ "CMD-SHELL", "curl http://localhost:8888/actuator/health" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  api-gateway:
+    image: redbird127/api-gateway
+    container_name: api-gateway
+    networks:
+      - chain
+    restart: always
+    depends_on:
+      config-server:
+        condition: service_healthy
+      eureka-server:
+        condition: service_healthy
+    ports:
+      - 8080:8080
+    environment:
+      - PORT=8080
+      - EUREKA_SERVER_ADDR=eureka-server
+      - EUREKA_SERVER_PORT=8761
+    healthcheck:
+      # change if port changed
+      test: [ "CMD-SHELL", "curl http://localhost:8080/actuator/health" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
