@@ -31,8 +31,8 @@
 ![image](https://spring.io/images/diagram-microservices-dark-4a2e5817aac093437f4f3b3a5be8be88.svg)
 В реальности конечно не так все круто, но тоже неплохо, как я уже говорил, имеется 3 сервиса
 * Сервис "Покупки"
-* Сервис "Магазин"
-* Сервис "Завод"
+* Сервис "Магазины"
+* Сервис "Заводы"
 
 Сразу замечу, весь проект написан с помощью [фреймворка spring boot](https://spring.io/projects/spring-boot), 
 а также инструментов [spring cloud](https://spring.io/projects/spring-cloud).
@@ -73,11 +73,12 @@
  ## А пользоваться как?
  Я мог бы тут, конечно, описать что да как, но за меня это сделает [open api 3.0](https://swagger.io/blog/news/whats-new-in-openapi-3-0/)
  , он же swagger.
+ ![swagger](https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn.auth0.com%2Fblog%2Faspnet-core-web-apis%2Fswagger.png&f=1&nofb=1)
  
  К сожалению, по какой-то неведомой мне причине получить ui страницу с документацией через api gateway не предоставляется возможным,
  поэтому я приложу пути к документации:
   * Для Сервиса "Покупки" - *http://localhost:8081/swagger-ui.html*
-  * Для Сервиса "Магазин" - *http://localhost:8082/swagger-ui.html*
+  * Для Сервиса "Магазины" - *http://localhost:8082/swagger-ui.html*
   * Для Сервиса "Заводы" - *http://localhost:8083/swagger-ui.html*
   
   Если поменяли порты у сервисов, то тут тоже меняются.
